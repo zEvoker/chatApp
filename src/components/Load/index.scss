@@ -1,0 +1,43 @@
+.load {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1c1c1c;
+
+    .loadicon {
+        width: 100px;
+
+        path {
+            fill: transparent;
+            stroke-width: 1;
+            stroke: #0ef;
+            stroke-dasharray: 69;
+            stroke-dashoffset: 0;
+            animation: loadplay 3s linear forwards;
+        }
+    }
+}
+
+@keyframes loadplay {
+    0% {
+        stroke-dashoffset: 0;
+    }
+
+    40% {
+        stroke-dashoffset: 69;
+    }
+
+    80% {
+        stroke-dashoffset: 138;
+        fill: transparent;
+    }
+
+    100% {
+        stroke-dashoffset: 138;
+        fill: #0ef;
+    }
+
+}

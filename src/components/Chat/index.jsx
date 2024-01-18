@@ -1,7 +1,7 @@
 import './index.scss'
 import Messages from '../Messages'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdd, faCamera, faHamburger, faImage, faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faCamera, faHamburger, faImage, faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { useContext, useState } from 'react';
 import { ChatContext } from '../../context/ChatContext';
 import { AuthContext } from '../../context/AuthContext';
@@ -11,12 +11,20 @@ import { v4 as uuid } from "uuid"
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
 const Chat = () => {
-    const [text, setText] = useState("");
+    const [txt, setTxt] = useState("");
     const [img, setImg] = useState(null);
     const { currentUser } = useContext(AuthContext);
     const { data } = useContext(ChatContext);
 
+    const handleDown = (event) => {
+        if (event.key === 'Enter') {
+            handleSend();
+        }
+    }
     const handleSend = async () => {
+        if (txt === "") return;
+        const text = txt;
+        setTxt("");
         if (img) {
             const storageRef = ref(storage, uuid());
             const uploadTask = uploadBytesResumable(storageRef, img);
@@ -62,7 +70,6 @@ const Chat = () => {
             [data.chatID + ".date"]: serverTimestamp()
         })
 
-        setText("");
         setImg(null);
     }
 
@@ -71,21 +78,25 @@ const Chat = () => {
             <div className="chatInfo">
                 <span>{data.user?.displayName}</span>
                 <div className="chatIcons">
-                    <FontAwesomeIcon icon={faCamera} color="#00bcd4" size='2x' style={{ height: "24px", cursor: "pointer" }} />
-                    <FontAwesomeIcon icon={faAdd} color="#00bcd4" size='2x' style={{ height: "24px", cursor: "pointer" }} />
-                    <FontAwesomeIcon icon={faHamburger} color="#00bcd4" size='2x' style={{ height: "24px", cursor: "pointer" }} />
+                    <FontAwesomeIcon icon={faCamera} color="lightgray" size='2x' style={{ height: "24px", cursor: "pointer" }} />
+                    <FontAwesomeIcon icon={faAdd} color="lightgray" size='2x' style={{ height: "24px", cursor: "pointer" }} />
+                    <FontAwesomeIcon icon={faHamburger} color="lightgray" size='2x' style={{ height: "24px", cursor: "pointer" }} />
                 </div>
             </div>
             <Messages />
             <div className="input">
-                <input type='text' placeholder='Type something...' onChange={e => setText(e.target.value)} value={text} />
+                <div className='uBox'>
+                    <input type="text" required="required" onChange={e => setTxt(e.target.value)} value={txt} onKeyDown={handleDown} />
+                    <span>type something...</span>
+                    <i></i>
+                </div>
                 <div className="send">
-                    <FontAwesomeIcon icon={faPaperclip} size='2x' style={{ height: "24px", cursor: "pointer" }} />
+                    <FontAwesomeIcon icon={faPaperclip} color='lightgray' size='2x' style={{ height: "24px", cursor: "pointer" }} />
                     <input type='file' style={{ display: 'none' }} id='file' onChange={e => setImg(e.target.files[0])} />
                     <label htmlFor='file'>
-                        <FontAwesomeIcon icon={faImage} size='2x' style={{ height: "24px", cursor: "pointer" }} />
+                        <FontAwesomeIcon icon={faImage} size='2x' color='lightgray' style={{ height: "24px", cursor: "pointer" }} />
                     </label>
-                    <button onClick={handleSend}>Send</button>
+                    <button onClick={handleSend}><FontAwesomeIcon icon={faPaperPlane} size='2x' color='#060c21' style={{ height: "24px", cursor: "pointer" }} /></button>
                 </div>
             </div>
         </div>

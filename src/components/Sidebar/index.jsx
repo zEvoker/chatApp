@@ -5,6 +5,8 @@ import { useContext, useState } from 'react';
 import { db } from "../../firebase"
 import { collection, query, where, serverTimestamp, getDoc, getDocs, doc, setDoc, updateDoc } from 'firebase/firestore';
 import { AuthContext } from '../../context/AuthContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Sidebar = () => {
     const [username, setUsername] = useState("");
@@ -72,10 +74,15 @@ const Sidebar = () => {
             <Navbar />
             <div className='search'>
                 <div className='searchForm'>
-                    <input type='text' value={username} placeholder='find a user' onKeyDown={handleKey} onChange={e => setUsername(e.target.value)} />
+                    <FontAwesomeIcon icon={faSearch} color='lightgray' size='2x' className='maglass' />
+                    <input type='text' value={username} placeholder='Find a user' onKeyDown={handleKey} onChange={e => { setErr(false); setUsername(e.target.value) }} />
                 </div>
             </div>
-            {err && <span>user not found!</span>}
+            {err &&
+                <div className="noUser">
+                    <span>No results found for '{username}'</span>
+                </div>
+            }
             {user && <div className='userChat' onClick={handleSelect}>
                 <img src={user.photoURL} alt='' />
                 <div className='userChatInfo'>

@@ -3,6 +3,8 @@ import './index.scss'
 import { auth } from '../../firebase';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRightFromBracket, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
     const { currentUser } = useContext(AuthContext);
@@ -12,7 +14,7 @@ const Navbar = () => {
             <div className='user'>
                 <img src={currentUser.photoURL} alt='' />
                 <span>{currentUser.displayName}</span>
-                <button onClick={() => signOut(auth)}>logout</button>
+                <FontAwesomeIcon icon={faArrowRightFromBracket} color="lightgray" size='2x' style={{ height: "24px", cursor: "pointer" }} onClick={() => signOut(auth)} />
             </div>
         </div>
     )

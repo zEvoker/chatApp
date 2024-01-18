@@ -1,6 +1,18 @@
 .messages {
-    background-color: #ddddf7;
-    padding: 10px;
+    background: url("../../assets/images/walp.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #060c21;
+    padding: 15px;
     height: calc(100% - 160px);
     overflow: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }

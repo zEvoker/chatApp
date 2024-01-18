@@ -2,50 +2,115 @@
     .chatInfo {
         height: 50px;
         display: flex;
-        background: #5d5b8d;
+        background: #060c21;
         align-items: center;
         justify-content: space-between;
         padding: 10px;
+        padding-left: 20px;
         color: lightgray;
 
         .chatIcons {
             display: flex;
-            gap: 10px;
+            gap: 15px;
+        }
+
+        span {
+            font-size: 2em;
         }
     }
 
     .input {
-        height: 50px;
-        background-color: white;
+        height: 40px;
+        background-color: #060c21;
         padding: 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
 
-        input {
-            width: 100%;
-            border: none;
-            outline: none;
-            color: #2f2d52;
-            font-size: 18px;
+        .uBox {
+            position: relative;
+            width: 480px;
 
-            &::placeholder {
-                color: lightgray;
+            input {
+                position: relative;
+                width: 100%;
+                padding: 15px 10px 8px;
+                background: transparent;
+                outline: none;
+                border: none;
+                box-shadow: none;
+                color: #5d5b8d;
+                font-size: 1.2em;
+                letter-spacing: 0.03em;
+                transition: 0.5s;
+                z-index: 10;
 
+                &:valid~span,
+                &:focus~span {
+                    color: lightgray;
+                    font-size: 0.75em;
+                    transform: translateY(-24px);
+                }
+
+                &:valid~i,
+                &:focus~i {
+                    height: 32px;
+                }
+            }
+
+            span {
+                position: absolute;
+                left: 3px;
+                bottom: 0px;
+                padding: 20px 0px 10px;
+                pointer-events: none;
+                color: #8f8f8f;
+                font-size: 1em;
+                letter-spacing: 0.05em;
+                transition: 0.5s;
+            }
+
+            i {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 500px;
+                height: 0px;
+                background: lightgray;
+                border-radius: 4px;
+                overflow: hidden;
+                transition: 0.5s;
+                pointer-events: none;
+            }
+
+            input:-webkit-autofill,
+            input:-webkit-autofill:hover,
+            input:-webkit-autofill:focus,
+            input:-webkit-autofill:active {
+                transition: all 0s ease-in-out 5000s;
             }
         }
 
         .send {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
 
             button {
                 border: none;
-                padding: 10px 15px;
-                color: white;
-                background: #5d5b8d;
+                border-radius: 50%;
+                padding: 10px;
+                background: lightgray;
                 cursor: pointer;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+
+                &:active {
+                    opacity: 0.8;
+                    transform: translateY(1px);
+                }
             }
         }
     }

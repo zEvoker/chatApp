@@ -1,5 +1,8 @@
 .home {
     background: #a7bcff;
+    background: url("../../assets/images/walp-copy2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -12,6 +15,7 @@
         height: 80%;
         display: flex;
         overflow: hidden;
+        box-shadow: 0 0 20px #060c21;
 
         .sidebar {
             flex: 1;

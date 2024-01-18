@@ -12,11 +12,27 @@ const Message = ({ message }) => {
         ref.current?.scrollIntoView({ behavior: "smooth" })
     }, [message])
 
+    const formatDateTime = (timestamp) => {
+        if (!timestamp || !timestamp.seconds) {
+            return '';  // or return some default value
+        }
+        const messageDate = new Date(timestamp.seconds * 1000);
+        const today = new Date();
+
+        if (messageDate.getDate() === today.getDate() && messageDate.getMonth() === today.getMonth() && messageDate.getFullYear() === today.getFullYear()) {
+            // If the message was sent today, show time
+            return messageDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        } else {
+            // If the message was sent on a different day, show date
+            return messageDate.toLocaleDateString();
+        }
+    };
+
     return (
         <div ref={ref} className={`message ${message.senderID === currentUser.uid && "owner"}`}>
             <div className="msgInfo">
                 <img src={message.senderID === currentUser.uid ? currentUser.photoURL : data.user.photoURL} alt='' />
-                <span>just now</span>
+                <span>{formatDateTime(message.data)}</span>
             </div>
             <div className="msgContent">
                 <p>{message.text}</p>
