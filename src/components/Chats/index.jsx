@@ -56,7 +56,7 @@ const Chats = () => {
                             <span>{chat[1].userInfo.displayName}</span>
                             <p>{formatDateTime(chat[1]?.date)}</p>
                         </div>
-                        <p>{chat[1].lastMessage?.text}</p>
+                        <p>{chat[1].lastMessage?.sender === currentUser.displayName ? "you: " : ""}{chat[1].lastMessage?.text}</p>
                     </div>
                 </div>
             ))}

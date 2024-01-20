@@ -75,7 +75,7 @@ const Sidebar = () => {
             <div className='search'>
                 <div className='searchForm'>
                     <FontAwesomeIcon icon={faSearch} color='lightgray' size='2x' className='maglass' />
-                    <input type='text' value={username} placeholder='Find a user' onKeyDown={handleKey} onChange={e => { setErr(false); setUsername(e.target.value) }} />
+                    <input type='text' value={username} placeholder='Find a user' onKeyDown={handleKey} onChange={e => { setErr(false); setUser(null); setUsername(e.target.value) }} />
                 </div>
             </div>
             {err &&

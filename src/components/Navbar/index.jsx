@@ -10,7 +10,7 @@ const Navbar = () => {
     const { currentUser } = useContext(AuthContext);
     return (
         <div className="navbar">
-            <span className='logo'>NITChat</span>
+            <span className='logo'>ChatApp</span>
             <div className='user'>
                 <img src={currentUser.photoURL} alt='' />
                 <span>{currentUser.displayName}</span>

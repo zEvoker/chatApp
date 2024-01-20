@@ -8,7 +8,9 @@
         color: white;
         cursor: pointer;
 
-        &:hover {
+        &:hover,
+        &:active,
+        &:focus {
             background-color: #0d1f37;
         }
 

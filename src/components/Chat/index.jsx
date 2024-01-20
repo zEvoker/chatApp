@@ -1,5 +1,6 @@
 import './index.scss'
 import Messages from '../Messages'
+import Menu from '../Menu'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd, faCamera, faHamburger, faImage, faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { useContext, useState } from 'react';
@@ -13,6 +14,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 const Chat = () => {
     const [txt, setTxt] = useState("");
     const [img, setImg] = useState(null);
+    const [showMenu, setShowMenu] = useState(false);
     const { currentUser } = useContext(AuthContext);
     const { data } = useContext(ChatContext);
 
@@ -59,12 +61,14 @@ const Chat = () => {
 
         await updateDoc(doc(db, "userChats", currentUser.uid), {
             [data.chatID + ".lastMessage"]: {
+                sender: currentUser.displayName,
                 text
             },
             [data.chatID + ".date"]: serverTimestamp()
         })
         await updateDoc(doc(db, "userChats", data.user.uid), {
             [data.chatID + ".lastMessage"]: {
+                sender: currentUser.displayName,
                 text
             },
             [data.chatID + ".date"]: serverTimestamp()
@@ -80,9 +84,10 @@ const Chat = () => {
                 <div className="chatIcons">
                     <FontAwesomeIcon icon={faCamera} color="lightgray" size='2x' style={{ height: "24px", cursor: "pointer" }} />
                     <FontAwesomeIcon icon={faAdd} color="lightgray" size='2x' style={{ height: "24px", cursor: "pointer" }} />
-                    <FontAwesomeIcon icon={faHamburger} color="lightgray" size='2x' style={{ height: "24px", cursor: "pointer" }} />
+                    <FontAwesomeIcon icon={faHamburger} color="lightgray" size='2x' style={{ height: "24px", cursor: "pointer" }} onClick={() => setShowMenu(!showMenu)} />
                 </div>
             </div>
+            {showMenu === true && <Menu />}
             <Messages />
             <div className="input">
                 <div className='uBox'>
