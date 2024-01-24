@@ -2,19 +2,18 @@ import './index.scss'
 import Sidebar from '../Sidebar'
 import Chat from '../Chat'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPalette } from '@fortawesome/free-solid-svg-icons';
+import { faBrush, faPalette } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 const Home = () => {
-    const [theme, setTheme] = useState(2);
-
-    const changeTheme = () => {
-        setTheme((theme + 1) % 3);
-    }
+    const [theme, setTheme] = useState(false);
+    const [color, setColor] = useState('lightgray');
 
     return (
-        <div className="home" style={theme < 2 ? { background: theme === 1 ? 'lightgray' : '#a7bcff' } : null} >
-            <FontAwesomeIcon icon={faPalette} color='lightgray' className='chTheme' onClick={changeTheme} />
+        <div className="home" style={theme ? { background: color } : null} >
+            <input type="color" value={color} id="favcolor" onChange={e => { setTheme(true); setColor(e.target.value) }} style={{ display: 'none' }} />
+            <label for="favcolor"><FontAwesomeIcon icon={faPalette} color='lightgray' className='chTheme' /></label>
+            {theme && <FontAwesomeIcon icon={faBrush} color='lightgray' className='resetTheme' onClick={e => setTheme(false)} />}
             <div className="container">
                 <Sidebar />
                 <Chat />
