@@ -2,6 +2,10 @@ import { useContext, useEffect, useRef } from 'react'
 import './index.scss'
 import { AuthContext } from '../../context/AuthContext'
 import { ChatContext } from '../../context/ChatContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencil, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { db } from '../../firebase';
+import { arrayRemove, doc, updateDoc } from 'firebase/firestore';
 
 const Message = ({ message }) => {
     const { currentUser } = useContext(AuthContext);
@@ -28,11 +32,29 @@ const Message = ({ message }) => {
         }
     };
 
+    const handleEdit = () => {
+
+    }
+
+    const handleDel = async () => {
+        try {
+            await updateDoc(doc(db, 'chats', data.chatID), {
+                messages: arrayRemove(message)
+            });
+        } catch (error) {
+            console.error("Error deleting message:", error);
+        }
+    }
+
     return (
         <div ref={ref} className={`message ${message.senderID === currentUser.uid && "owner"}`}>
             <div className="msgInfo">
                 <img src={message.senderID === currentUser.uid ? currentUser.photoURL : data.user.photoURL} alt='' />
                 <span>{formatDateTime(message.data)}</span>
+            </div>
+            <div className="editdel">
+                <FontAwesomeIcon icon={faPencil} className='editdelicon' onClick={handleEdit} />
+                <FontAwesomeIcon icon={faTrashAlt} className='editdelicon' onClick={handleDel} />
             </div>
             <div className="msgContent">
                 <p>{message.text}</p>
