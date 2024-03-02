@@ -6,14 +6,14 @@ import { faBrush, faPalette } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 const Home = () => {
-    const [theme, setTheme] = useState(false);
+    const [theme, setTheme] = useState(true);
     const [color, setColor] = useState('lightgray');
 
     return (
         <div className="home" style={theme ? { background: color } : null} >
             <input type="color" value={color} id="favcolor" onChange={e => { setTheme(true); setColor(e.target.value) }} style={{ display: 'none' }} />
-            <label for="favcolor"><FontAwesomeIcon icon={faPalette} color='lightgray' className='chTheme' /></label>
-            {theme && <FontAwesomeIcon icon={faBrush} color='lightgray' className='resetTheme' onClick={e => setTheme(false)} />}
+            <label for="favcolor"><FontAwesomeIcon icon={faPalette} color='black' className='chTheme' /></label>
+            {theme && <FontAwesomeIcon icon={faBrush} color='black' className='resetTheme' onClick={e => setTheme(false)} />}
             <div className="container">
                 <Sidebar />
                 <Chat />

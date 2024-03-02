@@ -12,6 +12,21 @@
         .chatIcons {
             display: flex;
             gap: 15px;
+
+            .optionIcon {
+                height: 24px;
+                cursor: pointer;
+
+                &:active {
+                    opacity: 0.8;
+                }
+            }
+
+            .activeIcon {
+                height: 24px;
+                cursor: pointer;
+                opacity: 0.8;
+            }
         }
 
         span {

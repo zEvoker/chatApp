@@ -2,7 +2,7 @@ import './index.scss'
 import Messages from '../Messages'
 import Menu from '../Menu'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdd, faCamera, faHamburger, faImage, faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faBars, faCamera, faImage, faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { useContext, useState } from 'react';
 import { ChatContext } from '../../context/ChatContext';
 import { AuthContext } from '../../context/AuthContext';
@@ -82,9 +82,9 @@ const Chat = () => {
             <div className="chatInfo">
                 <span>{data.user?.displayName}</span>
                 <div className="chatIcons">
-                    <FontAwesomeIcon icon={faCamera} color="lightgray" size='2x' style={{ height: "24px", cursor: "pointer" }} />
-                    <FontAwesomeIcon icon={faAdd} color="lightgray" size='2x' style={{ height: "24px", cursor: "pointer" }} />
-                    <FontAwesomeIcon icon={faHamburger} color="lightgray" size='2x' style={{ height: "24px", cursor: "pointer" }} onClick={() => setShowMenu(!showMenu)} />
+                    <FontAwesomeIcon icon={faCamera} color="lightgray" size='2x' className='optionIcon' />
+                    <FontAwesomeIcon icon={faAdd} color="lightgray" size='2x' className='optionIcon' />
+                    <FontAwesomeIcon icon={faBars} color="lightgray" size='2x' className={`${showMenu ? "activeIcon" : "optionIcon"}`} onClick={() => setShowMenu(!showMenu)} />
                 </div>
             </div>
             {showMenu === true && <Menu />}

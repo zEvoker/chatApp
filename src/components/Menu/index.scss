@@ -38,6 +38,22 @@
             }
         }
 
+        .confirmClear {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+
+            .confirmIcon {
+                color: lightgray;
+
+                &:hover {
+                    color: red;
+                    transform: scale(1.2);
+                }
+            }
+        }
+
     }
 
 }
