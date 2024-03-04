@@ -2,7 +2,7 @@ import './index.scss'
 import Messages from '../Messages'
 import Menu from '../Menu'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdd, faBars, faCamera, faImage, faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faArrowLeft, faBars, faCamera, faImage, faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { useContext, useState } from 'react';
 import { ChatContext } from '../../context/ChatContext';
 import { AuthContext } from '../../context/AuthContext';
@@ -17,11 +17,15 @@ const Chat = () => {
     const [showMenu, setShowMenu] = useState(false);
     const { currentUser } = useContext(AuthContext);
     const { data } = useContext(ChatContext);
+    const { dispatch } = useContext(ChatContext);
 
     const handleDown = (event) => {
         if (event.key === 'Enter') {
             handleSend();
         }
+    }
+    const handleBack = () => {
+        dispatch({ type: "RESET_USER" });
     }
     const handleSend = async () => {
         if (txt === "") return;
@@ -78,8 +82,9 @@ const Chat = () => {
     }
 
     return (
-        <div className="chat">
+        <div className={`chat ${data.user.uid && "sel"}`}>
             <div className="chatInfo">
+                <FontAwesomeIcon icon={faArrowLeft} color='lightgray' size='2x' className='goBack' onClick={handleBack} />
                 <span>{data.user?.displayName}</span>
                 <div className="chatIcons">
                     <FontAwesomeIcon icon={faCamera} color="lightgray" size='2x' className='optionIcon' />

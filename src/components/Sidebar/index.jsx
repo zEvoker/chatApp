@@ -7,12 +7,14 @@ import { collection, query, where, serverTimestamp, getDoc, getDocs, doc, setDoc
 import { AuthContext } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { ChatContext } from '../../context/ChatContext';
 
 const Sidebar = () => {
     const [username, setUsername] = useState("");
     const [user, setUser] = useState(null);
     const [err, setErr] = useState(false);
     const { currentUser } = useContext(AuthContext);
+    const { data } = useContext(ChatContext);
 
     const handleSearch = async () => {
         const q = query(collection(db, "users"), where("displayName", "==", username));
@@ -70,7 +72,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div className="sidebar">
+        <div className={`sidebar ${data.user.uid && "sel"}`} >
             <Navbar />
             <div className='search'>
                 <div className='searchForm'>
@@ -78,19 +80,22 @@ const Sidebar = () => {
                     <input type='text' value={username} placeholder='Find a user' onKeyDown={handleKey} onChange={e => { setErr(false); setUser(null); setUsername(e.target.value) }} />
                 </div>
             </div>
-            {err &&
+            {
+                err &&
                 <div className="noUser">
                     <span>No results found for '{username}'</span>
                 </div>
             }
-            {user && <div className='userChat' onClick={handleSelect}>
-                <img src={user.photoURL} alt='' />
-                <div className='userChatInfo'>
-                    <span>{user.displayName}</span>
+            {
+                user && <div className='userChat' onClick={handleSelect}>
+                    <img src={user.photoURL} alt='' />
+                    <div className='userChatInfo'>
+                        <span>{user.displayName}</span>
+                    </div>
                 </div>
-            </div>}
+            }
             <Chats />
-        </div>
+        </div >
     );
 }
 

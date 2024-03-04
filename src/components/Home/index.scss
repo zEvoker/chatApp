@@ -39,3 +39,39 @@
         }
     }
 }
+
+@media screen and (max-width: 900px) {
+    .home {
+        .chTheme {
+            display: none;
+        }
+
+        .resetTheme {
+            display: none;
+        }
+
+        .container {
+            border-radius: 0;
+            width: 100%;
+            height: 100%;
+
+            .sidebar {
+                display: block;
+                width: 100%;
+
+                &.sel {
+                    display: none;
+                }
+            }
+
+            .chat {
+                display: none;
+
+                &.sel {
+                    display: block;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

@@ -3,11 +3,13 @@ import Sidebar from '../Sidebar'
 import Chat from '../Chat'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBrush, faPalette } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { ChatContext } from '../../context/ChatContext';
 
 const Home = () => {
     const [theme, setTheme] = useState(true);
     const [color, setColor] = useState('lightgray');
+    const { data } = useContext(ChatContext);
 
     return (
         <div className="home" style={theme ? { background: color } : null} >

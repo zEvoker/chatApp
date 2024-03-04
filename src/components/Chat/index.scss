@@ -29,6 +29,10 @@
             }
         }
 
+        .goBack {
+            display: none;
+        }
+
         span {
             font-size: 2em;
         }
@@ -129,4 +133,23 @@
             }
         }
     }
+}
+
+@media screen and (max-width: 900px) {
+    .chat {
+        .chatInfo {
+            .goBack {
+                display: flex;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+
+                &:active {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+
 }
