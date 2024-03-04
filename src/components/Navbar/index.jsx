@@ -14,7 +14,7 @@ const Navbar = () => {
             <div className='user'>
                 <img src={currentUser.photoURL} alt='' />
                 <span>{currentUser.displayName}</span>
-                <FontAwesomeIcon icon={faArrowRightFromBracket} color="lightgray" size='2x' style={{ height: "24px", cursor: "pointer" }} onClick={() => signOut(auth)} />
+                <FontAwesomeIcon icon={faArrowRightFromBracket} color="lightgray" size='2x' style={{ height: "20px", cursor: "pointer" }} onClick={() => signOut(auth)} />
             </div>
         </div>
     )

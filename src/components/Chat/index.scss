@@ -9,6 +9,10 @@
         padding-left: 20px;
         color: lightgray;
 
+        img {
+            display: none;
+        }
+
         .chatIcons {
             display: flex;
             gap: 15px;
@@ -138,6 +142,19 @@
 @media screen and (max-width: 900px) {
     .chat {
         .chatInfo {
+            img {
+                display: block;
+                background-color: #ddddf7;
+                height: 30px;
+                width: 30px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            span {
+                width: 50%;
+            }
+
             .goBack {
                 display: flex;
 
@@ -150,6 +167,33 @@
                 }
             }
         }
+
+        .input {
+
+            .uBox {
+                width: 80%;
+
+                i {
+                    width: 103%;
+                }
+            }
+        }
     }
 
+}
+
+@media screen and (max-width: 600px) {
+    .chat {
+
+        .input {
+
+            .uBox {
+                width: 65%;
+
+                i {
+                    width: 105%;
+                }
+            }
+        }
+    }
 }

@@ -85,6 +85,7 @@ const Chat = () => {
         <div className={`chat ${data.user.uid && "sel"}`}>
             <div className="chatInfo">
                 <FontAwesomeIcon icon={faArrowLeft} color='lightgray' size='2x' className='goBack' onClick={handleBack} />
+                <img src={data.user.photoURL} alt="avatar" />
                 <span>{data.user?.displayName}</span>
                 <div className="chatIcons">
                     <FontAwesomeIcon icon={faCamera} color="lightgray" size='2x' className='optionIcon' />
